@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Brand AI-Readiness Audit</title>
+<style>
+  :root {
+    --critical: #b91c1c; --high: #c2410c; --medium: #b45309; --low: #6b7280;
+    --bg: #f8fafc; --card: #ffffff; --ink: #1e293b; --muted: #64748b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg); color: var(--ink); margin: 0; padding: 2rem 1rem;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+  .subtitle { color: var(--muted); margin-top: 0; margin-bottom: 1.5rem; font-size: 0.95rem; }
+  form {
+    display: flex; gap: 0.5rem; background: var(--card); padding: 1rem;
+    border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
+  }
+  input[type=text] {
+    flex: 1; padding: 0.65rem 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem;
+  }
+  button {
+    padding: 0.65rem 1.4rem; background: #4338ca; color: white; border: none;
+    border-radius: 6px; font-size: 1rem; cursor: pointer;
+  }
+  button:hover { background: #3730a3; }
+  .errors { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
+    padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  .summary { display: flex; gap: 0.6rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .pill { padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; color: white; }
+  .pill.total { background: #1e293b; }
+  .pill.critical { background: var(--critical); }
+  .pill.high { background: var(--high); }
+  .pill.medium { background: var(--medium); }
+  .pill.low { background: var(--low); }
+  .finding {
+    background: var(--card); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 5px solid var(--muted);
+  }
+  .finding.critical { border-left-color: var(--critical); }
+  .finding.high { border-left-color: var(--high); }
+  .finding.medium { border-left-color: var(--medium); }
+  .finding.low { border-left-color: var(--low); }
+  .finding-title { font-weight: 600; font-size: 1.02rem; margin-bottom: 0.3rem; }
+  .badge { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em;
+    font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; color: white; margin-right: 0.5rem; }
+  .badge.critical { background: var(--critical); }
+  .badge.high { background: var(--high); }
+  .badge.medium { background: var(--medium); }
+  .badge.low { background: var(--low); }
+  .evidence { color: var(--muted); font-size: 0.88rem; margin: 0.5rem 0; line-height: 1.4; }
+  .action { background: #f1f5f9; border-radius: 6px; padding: 0.6rem 0.8rem; font-size: 0.9rem; margin-top: 0.5rem; }
+  .action strong { display: block; margin-bottom: 0.15rem; font-size: 0.78rem; text-transform: uppercase; color: var(--muted); }
+  .empty { text-align: center; color: var(--muted); padding: 2rem 0; }
+  .meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Brand AI-Readiness Audit</h1>
+  <p class="subtitle">Checks a site for AI-discoverability and on-site-engagement problems.</p>
+
+  <form method="POST">
+    <input type="text" name="url" placeholder="example.com or https://example.com"
+           value="{{ site or '' }}" required>
+    <button type="submit">Run audit</button>
+  </form>
+
+  {% if errors %}
+  <div class="errors">
+    <strong>Some checks had issues:</strong>
+    <ul style="margin: 0.4rem 0 0; padding-left: 1.2rem;">
+      {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if report %}
+    <p class="meta">Audited <strong>{{ report.site }}</strong> at {{ report.audited_at }}</p>
+    <div class="summary">
+      <span class="pill total">{{ report.summary.total_findings }} total</span>
+      {% for sev in ['critical', 'high', 'medium', 'low'] %}
+        {% if report.summary.get(sev) %}
+          <span class="pill {{ sev }}">{{ report.summary[sev] }} {{ sev }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if report.findings %}
+      {% for f in report.findings %}
+      <div class="finding {{ f.severity }}">
+        <div class="finding-title">
+          <span class="badge {{ f.severity }}">{{ f.severity }}</span>{{ f.title }}
+        </div>
+        <div class="evidence">{{ f.evidence }}</div>
+        <div class="action">
+          <strong>Suggested action ({{ f.suggested_action.priority }} priority)</strong>
+          {{ f.suggested_action.summary }}
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty">No findings — nothing flagged by the audit.</div>
+    {% endif %}
+  {% endif %}
+</div>
+</body>
+</html>

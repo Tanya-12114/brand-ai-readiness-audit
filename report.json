@@ -1,0 +1,92 @@
+﻿{
+  "site": "example.com",
+  "audited_at": "2026-09-01T16:46:13Z",
+  "summary": {
+    "total_findings": 8,
+    "high": 2,
+    "medium": 4,
+    "low": 2
+  },
+  "findings": [
+    {
+      "id": "F-001",
+      "title": "No JSON-LD structured data on page",
+      "severity": "high",
+      "evidence": "0 <script type=\"application/ld+json\"> blocks found.",
+      "suggested_action": {
+        "summary": "Add JSON-LD (Organization/Product/Article as appropriate) with the page's core facts so assistants can extract them unambiguously.",
+        "priority": "high"
+      }
+    },
+    {
+      "id": "F-002",
+      "title": "No breadcrumb or active-section indicator found",
+      "severity": "high",
+      "evidence": "No breadcrumb element and no nav item with aria-current found in the page HTML.",
+      "suggested_action": {
+        "summary": "Add a breadcrumb trail or highlight the active section in navigation so visitors landing deep can orient immediately.",
+        "priority": "high"
+      }
+    },
+    {
+      "id": "F-003",
+      "title": "No valid sitemap.xml found",
+      "severity": "medium",
+      "evidence": "GET /sitemap.xml returned status no response",
+      "suggested_action": {
+        "summary": "Publish a sitemap.xml listing all indexable URLs and reference it in robots.txt so new/updated pages are discovered faster.",
+        "priority": "medium"
+      }
+    },
+    {
+      "id": "F-004",
+      "title": "Missing meta description",
+      "severity": "medium",
+      "evidence": "No non-empty meta[name=description] found.",
+      "suggested_action": {
+        "summary": "Add a unique meta description summarizing the page's key facts in plain text.",
+        "priority": "medium"
+      }
+    },
+    {
+      "id": "F-005",
+      "title": "No freshness/date signal found on page",
+      "severity": "medium",
+      "evidence": "No dateModified/datePublished JSON-LD, date meta tags, or visible 'last updated' text found on https://example.com.",
+      "suggested_action": {
+        "summary": "Add a dateModified field to JSON-LD and/or a visible 'Last updated' line for time-sensitive content.",
+        "priority": "medium"
+      }
+    },
+    {
+      "id": "F-006",
+      "title": "No visible contact path or trust/legitimacy signal",
+      "severity": "medium",
+      "evidence": "No contact/support wording and no review/testimonial/certification wording found on page.",
+      "suggested_action": {
+        "summary": "Add a visible contact/support link and at least one legitimacy signal (reviews, case studies, credentials) appropriate to the page.",
+        "priority": "medium"
+      }
+    },
+    {
+      "id": "F-007",
+      "title": "Context retention across client-side navigation not verified",
+      "severity": "low",
+      "evidence": "This check requires executing JavaScript / simulating navigation and was not run in static-HTML mode.",
+      "suggested_action": {
+        "summary": "Re-run with a browser-rendering tool to confirm selections/filters survive back-navigation.",
+        "priority": "low"
+      }
+    },
+    {
+      "id": "F-008",
+      "title": "Interstitials / autoplay / layout shift not verified",
+      "severity": "low",
+      "evidence": "These are runtime behaviors and were not confirmed in static-HTML mode.",
+      "suggested_action": {
+        "summary": "Re-run with a browser-rendering tool to observe first-paint behavior directly.",
+        "priority": "low"
+      }
+    }
+  ]
+}

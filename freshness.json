@@ -1,0 +1,12 @@
+﻿[
+  {
+    "id": "FC-001",
+    "title": "No freshness/date signal found on page",
+    "severity": "medium",
+    "evidence": "No dateModified/datePublished JSON-LD, date meta tags, or visible 'last updated' text found on https://www.nytimes.com.",
+    "suggested_action": {
+      "summary": "Add a dateModified field to JSON-LD and/or a visible 'Last updated' line for time-sensitive content.",
+      "priority": "medium"
+    }
+  }
+]

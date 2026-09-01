@@ -1,0 +1,32 @@
+﻿[
+  {
+    "id": "CR-001",
+    "title": "robots.txt blocks AI-assistant / search crawlers from core content",
+    "severity": "critical",
+    "evidence": "robots.txt disallows: GPTBot, Google-Extended, ChatGPT-User, CCBot, anthropic-ai, PerplexityBot at https://www.nytimes.com/robots.txt",
+    "suggested_action": {
+      "summary": "Remove or narrow the Disallow rules for AI/search agents so core content paths (product, blog, docs, marketing) are fetchable; keep auth/cart paths blocked.",
+      "priority": "critical"
+    }
+  },
+  {
+    "id": "CR-002",
+    "title": "No valid sitemap.xml found",
+    "severity": "medium",
+    "evidence": "GET /sitemap.xml returned status no response",
+    "suggested_action": {
+      "summary": "Publish a sitemap.xml listing all indexable URLs and reference it in robots.txt so new/updated pages are discovered faster.",
+      "priority": "medium"
+    }
+  },
+  {
+    "id": "CR-003",
+    "title": "Linked pages return errors",
+    "severity": "high",
+    "evidence": "10 of 15 linked pages failed: https://www.nytimes.com/2026/08/25/us/lindsay-clancy-trial.html -> no response; https://www.nytimes.com/interactive/polls/massachusetts-us-senate-election-polls-2026.html -> no response; https://www.nytimes.com/2026/09/01/world/middleeast/israel-gaza-hamas-leader.html -> no response; https://www.nytimes.com/2026/09/01/magazine/maha-cancer-treatment-doctors-cps.html -> no response; https://www.nytimes.com/interactive/2026/us/elections/2026-election-calendar.html -> no response",
+    "suggested_action": {
+      "summary": "Fix or remove links to dead pages; add redirects for moved content.",
+      "priority": "high"
+    }
+  }
+]

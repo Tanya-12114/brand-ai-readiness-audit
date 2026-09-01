@@ -1,0 +1,32 @@
+﻿[
+  {
+    "id": "EN-001",
+    "title": "No breadcrumb or active-section indicator found",
+    "severity": "high",
+    "evidence": "No breadcrumb element and no nav item with aria-current found in the page HTML.",
+    "suggested_action": {
+      "summary": "Add a breadcrumb trail or highlight the active section in navigation so visitors landing deep can orient immediately.",
+      "priority": "high"
+    }
+  },
+  {
+    "id": "EN-NOTE-1",
+    "title": "Context retention across client-side navigation not verified",
+    "severity": "low",
+    "evidence": "This check requires executing JavaScript / simulating navigation and was not run in static-HTML mode.",
+    "suggested_action": {
+      "summary": "Re-run with a browser-rendering tool to confirm selections/filters survive back-navigation.",
+      "priority": "low"
+    }
+  },
+  {
+    "id": "EN-NOTE-2",
+    "title": "Interstitials / autoplay / layout shift not verified",
+    "severity": "low",
+    "evidence": "These are runtime behaviors and were not confirmed in static-HTML mode.",
+    "suggested_action": {
+      "summary": "Re-run with a browser-rendering tool to observe first-paint behavior directly.",
+      "priority": "low"
+    }
+  }
+]
