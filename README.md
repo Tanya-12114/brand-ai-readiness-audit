@@ -2,7 +2,7 @@
 
 An Agent Skill Marketplace that audits a website for the two Round‑2 failure modes:
 
-1. **Off-site discoverability** — why an AI assistant would fail to find, fetch, extract, trust, or cite the brand.
+1. **Off-site discoverability** — Why an AI assistant would fail to find, fetch, extract, trust, or cite the brand.
 2. **On-site engagement** — why a visitor who does arrive doesn't stay or convert.
 
 It is **read-only / recommend-only**: no skill fetches authenticated areas, submits forms, ignores `robots.txt`, or writes anything back to the target site. Every skill only reads and reports.
